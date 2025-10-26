@@ -14,7 +14,6 @@ class User(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     email = Column(String(255), unique=True, nullable=False, index=True)
     phone_number = Column(String(20), unique=True)
-    password_hash = Column(String(255)) # Vẫn định nghĩa ở đây, nhưng API sẽ bỏ qua
     full_name = Column(String(100), nullable=False)
     role = Column(String(20), nullable=False, default='passenger')
     is_verified = Column(Boolean, nullable=False, default=False)
