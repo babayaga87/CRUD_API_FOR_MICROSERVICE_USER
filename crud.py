@@ -46,7 +46,6 @@ def create_user(db: Session, user: schemas.UserCreate):
         email=user.email,
         full_name=user.full_name,
         phone_number=user.phone_number,
-        password_hash=None, # Rất quan trọng: Bỏ qua mật khẩu
         role='passenger' # Mặc định
     )
     db.add(db_user)
