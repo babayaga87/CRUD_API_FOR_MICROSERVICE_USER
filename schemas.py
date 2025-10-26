@@ -20,7 +20,6 @@ class VehicleCreate(VehicleBase):
 
 class VehicleUpdate(BaseModel):
     # Khi cập nhật, mọi thứ đều là tùy chọn
-    license_plate: Optional[str] = None
     model: Optional[str] = None
     color: Optional[str] = None
     year: Optional[int] = None
