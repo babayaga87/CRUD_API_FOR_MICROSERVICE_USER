@@ -56,10 +56,27 @@ def create_user(db: Session, user: schemas.UserCreate):
 # --- CRUD CHO DRIVER PROFILE ---
 
 def create_driver_profile(db: Session, profile: schemas.DriverProfileCreate, user_id: UUID):
-    db_profile = models.DriverProfile(**profile.dict(), user_id=user_id)
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+
+    if not db_user:
+        return None 
+
+    profile_data = profile.dict() 
+    
+    db_profile = models.DriverProfile(**profile_data, user_id=user_id)
     db.add(db_profile)
-    db.commit()
-    db.refresh(db_profile)
+
+
+    db_user.role = "driver"
+    db.add(db_user)# Thông báo cho session biết là object này đã thay đổi
+
+    try:
+        db.commit()
+        db.refresh(db_profile) # Làm mới để lấy dữ liệu từ CSDL (như ID mới)
+    except Exception as e:
+        db.rollback() # Hoàn tác nếu có lỗi
+        raise e
+    
     return db_profile
 
 def get_driver_profile(db: Session, profile_id: UUID):
