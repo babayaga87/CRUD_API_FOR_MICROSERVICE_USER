@@ -31,7 +31,6 @@ class DriverProfile(Base):
     driver_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, unique=True)
     license_number = Column(String(100), unique=True, nullable=False)
-    license_expiry = Column(Date)
     approval_status = Column(String(20), default='pending')
     rating_avg = Column(Numeric(3, 2), default=0.0)
     total_trips = Column(Integer, default=0)
