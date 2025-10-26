@@ -39,7 +39,6 @@ class Vehicle(VehicleBase):
 
 class DriverProfileBase(BaseModel):
     license_number: str
-    license_expiry: Optional[date] = None
 
 class DriverProfileCreate(DriverProfileBase):
     pass
@@ -57,7 +56,6 @@ class DriverProfile(DriverProfileBase):
 
 class DriverProfileUpdate(BaseModel):
     license_number: Optional[str] = None
-    license_expiry: Optional[date] = None
     approval_status: Optional[str] = None # Thường admin mới được sửa cái này
     profile_photo_url: Optional[str] = None
 
